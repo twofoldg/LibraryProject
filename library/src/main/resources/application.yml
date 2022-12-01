@@ -6,8 +6,6 @@ spring:
       show_sql: true
       ddl-auto: update
     generate-ddl: true
-  thymeleaf:
-    prefix: classpath:/templates/
 
   datasource:
     url: ${app.datasource.url}
