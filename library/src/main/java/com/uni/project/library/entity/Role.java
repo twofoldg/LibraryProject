@@ -17,7 +17,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "roles")
 @Immutable
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Role extends BaseEntity {
@@ -41,5 +40,13 @@ public class Role extends BaseEntity {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), name);
+    }
+
+    public RoleEnum getName() {
+        return name;
+    }
+
+    public void setName(RoleEnum name) {
+        this.name = name;
     }
 }

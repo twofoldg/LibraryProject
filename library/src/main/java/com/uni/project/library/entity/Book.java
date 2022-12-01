@@ -1,7 +1,6 @@
 package com.uni.project.library.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
@@ -10,16 +9,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import java.io.Serial;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Book extends BaseEntity {
 
+    @Serial
     private static final long serialVersionUID = -2628256794549784126L;
 
     @Column(name = "name", nullable = false, length = 50)
@@ -52,6 +52,7 @@ public class Book extends BaseEntity {
     @ManyToOne
     private Category category;
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,5 +72,69 @@ public class Book extends BaseEntity {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), name, yearPublished, isbn, serialName, author, publisher, description, category);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public long getYearPublished() {
+        return yearPublished;
+    }
+
+    public void setYearPublished(long yearPublished) {
+        this.yearPublished = yearPublished;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public String getSerialName() {
+        return serialName;
+    }
+
+    public void setSerialName(String serialName) {
+        this.serialName = serialName;
+    }
+
+    public Set<Author> getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Set<Author> author) {
+        this.author = author;
+    }
+
+    public Set<Publisher> getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(Set<Publisher> publisher) {
+        this.publisher = publisher;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

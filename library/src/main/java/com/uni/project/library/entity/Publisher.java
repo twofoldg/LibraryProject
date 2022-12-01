@@ -12,7 +12,6 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Publisher extends BaseEntity {
@@ -25,4 +24,19 @@ public class Publisher extends BaseEntity {
     @ManyToMany(mappedBy = "publisher")
     private Set<Book> books = new HashSet<>();
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+    }
 }

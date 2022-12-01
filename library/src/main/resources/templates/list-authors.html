@@ -30,7 +30,6 @@
 						<thead>
 							<tr>
 								<th>Author Name</th>
-								<th>Description</th>
 								<th>Edit</th>
 								<th>Delete</th>
 							</tr>
@@ -38,7 +37,6 @@
 						<tbody>
 							<tr th:each="author : ${authors}">
 								<td th:text="${author.name}"></td>
-								<td th:text="${author.description}"></td>
 								<td><a th:href="@{/updateAuthor/{id}(id=${author.id})}"
 									class="btn btn-warning"><i class="fas fa-user-edit ml-2"></i></a></td>
 								<td><a th:href="@{/remove-author/{id}(id=${author.id})}"

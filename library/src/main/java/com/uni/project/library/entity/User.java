@@ -2,7 +2,6 @@ package com.uni.project.library.entity;
 
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
@@ -14,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -26,10 +26,10 @@ import static com.uni.project.library.util.Constants.PASSWORD_LENGTH;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Table(name = "users")
 public class User extends BaseEntity {
 
+    @Serial
     private static final long serialVersionUID = -7303363167680504195L;
 
     @NotNull
@@ -67,5 +67,37 @@ public class User extends BaseEntity {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), email, password, roles, userInformation);
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public List<UserInformation> getUserInformation() {
+        return userInformation;
+    }
+
+    public void setUserInformation(List<UserInformation> userInformation) {
+        this.userInformation = userInformation;
     }
 }
