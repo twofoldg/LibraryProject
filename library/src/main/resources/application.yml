@@ -1,0 +1,22 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+      show_sql: true
+      ddl-auto: update
+    generate-ddl: true
+  thymeleaf:
+    prefix: classpath:/templates/
+
+  datasource:
+    url: ${app.datasource.url}
+    username: ${app.datasource.username}
+    password: ${app.datasource.password}
+    driver-class-name: org.postgresql.Driver
+
+app:
+  datasource:
+    url: ${LIBRARY_DB_URL}
+    username: ${LIBRARY_DB_USER}
+    password: ${LIBRARY_DB_PASSWORD}

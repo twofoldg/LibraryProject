@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  postgres:
+    restart: always
+    networks:
+      - uni_library
+    image: postgres:15.0
+    container_name: library_postgres
+    environment:
+      - POSTGRES_DB=${LIBRARY_DB_NAME}
+      - POSTGRES_USER=${LIBRARY_DB_USER}
+      - POSTGRES_PASSWORD=${LIBRARY_DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - uni_library:/var/lib/postgresql/data
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+networks:
+  uni_library:
+    external: true
+
+volumes:
+  uni_library:
