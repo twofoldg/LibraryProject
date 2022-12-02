@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	  lang="en">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -19,9 +22,7 @@
 		<div th:switch="${categories}" class="container my-5">
 			<p class="my-5">
 				<a href="/addCategory" class="btn btn-dark"> <i
-					class="fas fa-user-plus ml-2"> Add Category </i></a>&nbsp;&nbsp;<a
-					href="/export/all-category" class="btn btn-info"> <i
-					class="fas fa-file-csv ml-2"> Export CSV </i></a>
+					class="fas fa-user-plus ml-2"> Add Category </i></a>
 			</p>
 			<div class="col-md-12">
 				<h2 th:case="null">No record found !!</h2>
@@ -30,16 +31,16 @@
 						<thead>
 							<tr>
 								<th>Category Name</th>
-								<th>Edit</th>
-								<th>Delete</th>
+								<th sec:authorize="hasAuthority('ROLE_ADMIN')">Edit</th>
+								<th sec:authorize="hasAuthority('ROLE_ADMIN')">Delete</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="category : ${categories}">
 								<td th:text="${category.name}"></td>
-								<td><a th:href="@{/updateCategory/{id}(id=${category.id})}"
+								<td sec:authorize="hasAuthority('ROLE_ADMIN')"><a th:href="@{/updateCategory/{id}(id=${category.id})}"
 									class="btn btn-warning"><i class="fas fa-user-edit ml-2"></i></a></td>
-								<td><a
+								<td sec:authorize="hasAuthority('ROLE_ADMIN')"><a
 									th:href="@{/remove-category/{id}(id=${category.id})}"
 									class="btn btn-danger"><i class="fas fa-user-times ml-2"></i></a></td>
 							</tr>

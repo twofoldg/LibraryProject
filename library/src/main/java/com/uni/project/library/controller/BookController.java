@@ -8,6 +8,8 @@ import com.uni.project.library.service.PublisherService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -51,6 +53,7 @@ public class BookController {
             var pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().toList();
             model.addAttribute("pageNumbers", pageNumbers);
         }
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return "list-books";
     }
 
@@ -66,6 +69,7 @@ public class BookController {
     public String findBookById(@PathVariable("id") Long id, Model model) {
 
         model.addAttribute("book", bookService.findBookById(id));
+
         return "list-book";
     }
 

@@ -25,28 +25,27 @@ public class Role extends BaseEntity {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "name")
-    private RoleEnum name;
+    @Column(name = "role")
+    private RoleEnum role;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Role role = (Role) o;
-        return name == role.name;
+        Role role1 = (Role) o;
+        return role == role1.role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), name);
+        return Objects.hash(role);
     }
 
-    public RoleEnum getName() {
-        return name;
+    public RoleEnum getRole() {
+        return role;
     }
 
-    public void setName(RoleEnum name) {
-        this.name = name;
+    public void setRole(RoleEnum role) {
+        this.role = role;
     }
 }

@@ -1,14 +1,13 @@
 package com.uni.project.library.config;
 
-import com.uni.project.library.enums.RoleEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -16,7 +15,8 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig{
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
+public class SecurityConfig {
 
     @Autowired
     private DataSource dataSource;
@@ -43,13 +43,14 @@ public class SecurityConfig{
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
-                .usersByUsernameQuery("SELECT email,password, 1 as enabled "
+                .usersByUsernameQuery("SELECT email as username, password as password, 1 as enabled "
                         + "FROM users "
                         + "WHERE email = ?")
-                .authoritiesByUsernameQuery("SELECT u.email, r.name " +
+                .authoritiesByUsernameQuery("SELECT u.email as username, r.role as role " +
                         "FROM ROLES r " +
                         "JOIN user_roles ur on ur.role_id = r.id " +
                         "JOIN users u on ur.user_id = u.id "
-                        + "where email = ?");
+                        + "where email = ?")
+                .passwordEncoder(new BCryptPasswordEncoder());
     }
 }

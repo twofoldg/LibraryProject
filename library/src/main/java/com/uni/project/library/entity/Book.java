@@ -25,9 +25,6 @@ public class Book extends BaseEntity {
     @Column(name = "name", nullable = false, length = 50)
     private String name;
 
-    @Column(name = "yearPublished")
-    private long yearPublished;
-
     @Column(name = "isbn", nullable = false, length = 13, unique = true)
     private String isbn;
 
@@ -59,8 +56,7 @@ public class Book extends BaseEntity {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Book book = (Book) o;
-        return yearPublished == book.yearPublished &&
-                Objects.equals(name, book.name) &&
+        return  Objects.equals(name, book.name) &&
                 Objects.equals(isbn, book.isbn) &&
                 Objects.equals(serialName, book.serialName) &&
                 Objects.equals(author, book.author) &&
@@ -71,7 +67,7 @@ public class Book extends BaseEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), name, yearPublished, isbn, serialName, author, publisher, description, category);
+        return Objects.hash(super.hashCode(), name, isbn, serialName, author, publisher, description, category);
     }
 
     public String getName() {
@@ -80,14 +76,6 @@ public class Book extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public long getYearPublished() {
-        return yearPublished;
-    }
-
-    public void setYearPublished(long yearPublished) {
-        this.yearPublished = yearPublished;
     }
 
     public String getIsbn() {
