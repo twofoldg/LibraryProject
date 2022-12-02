@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -45,12 +45,14 @@
 								<td th:text="${book.name}"></td>
 								<td th:text="${book.serialName}"></td>
 								<td th:text="${book.description}"></td>
+								<div sec:authorize="hasRole('ADMIN')">
 								<td><a th:href="@{/book/{id}(id=${book.id})}"
 									class="btn btn-info"><i class="fas fa-marker ml-2"></i></a></td>
 								<td><a th:href="@{/update/{id}(id=${book.id})}"
 									class="btn btn-warning"><i class="fas fa-user-edit ml-2"></i></a></td>
 								<td><a th:href="@{/remove-book/{id}(id=${book.id})}"
 									class="btn btn-danger"><i class="fas fa-user-times ml-2"></i></a></td>
+								</div>
 							</tr>
 						</tbody>
 					</table>
