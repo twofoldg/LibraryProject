@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -21,7 +22,7 @@ public class Publisher extends BaseEntity {
     @Column(name = "name", nullable = false, length = 100)
     private String name;
 
-    @ManyToMany(mappedBy = "publisher")
+    @OneToMany(mappedBy = "publisher")
     private Set<Book> books = new HashSet<>();
 
     public String getName() {

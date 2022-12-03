@@ -37,11 +37,8 @@ public class Book extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> author = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(name = "book_publishers",
-            joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "publisher_id"))
-    private Set<Publisher> publisher = new HashSet<>();
+    @ManyToOne
+    private Publisher publisher;
 
     @Column(name = "description", length = 500)
     private String description;
@@ -49,14 +46,13 @@ public class Book extends BaseEntity {
     @ManyToOne
     private Category category;
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Book book = (Book) o;
-        return  Objects.equals(name, book.name) &&
+        return Objects.equals(name, book.name) &&
                 Objects.equals(isbn, book.isbn) &&
                 Objects.equals(serialName, book.serialName) &&
                 Objects.equals(author, book.author) &&
@@ -102,11 +98,11 @@ public class Book extends BaseEntity {
         this.author = author;
     }
 
-    public Set<Publisher> getPublisher() {
+    public Publisher getPublisher() {
         return publisher;
     }
 
-    public void setPublisher(Set<Publisher> publisher) {
+    public void setPublisher(Publisher publisher) {
         this.publisher = publisher;
     }
 

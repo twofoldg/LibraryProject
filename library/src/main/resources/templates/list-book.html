@@ -47,7 +47,7 @@
 										<td>
 											<p th:each="author : ${book.author}" th:text = "${author.getName()}"></p>
 										</td>
-										<td th:text="${book.publisher[0].name}"></td>
+										<td th:text="${book.publisher.getName()}"></td>
 										<td th:text="${book.serialName}"></td>
 										<td th:text="${book.description}"></td>
 									</tr>

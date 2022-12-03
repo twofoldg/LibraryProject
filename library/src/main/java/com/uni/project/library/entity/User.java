@@ -49,9 +49,6 @@ public class User extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "user")
-    private List<UserInformation> userInformation = new ArrayList<>();
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -60,13 +57,12 @@ public class User extends BaseEntity {
         User user = (User) o;
         return Objects.equals(email, user.email) &&
                 Objects.equals(password, user.password) &&
-                Objects.equals(roles, user.roles) &&
-                Objects.equals(userInformation, user.userInformation);
+                Objects.equals(roles, user.roles);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), email, password, roles, userInformation);
+        return Objects.hash(super.hashCode(), email, password, roles);
     }
 
     public String getEmail() {
@@ -91,13 +87,5 @@ public class User extends BaseEntity {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
-    }
-
-    public List<UserInformation> getUserInformation() {
-        return userInformation;
-    }
-
-    public void setUserInformation(List<UserInformation> userInformation) {
-        this.userInformation = userInformation;
     }
 }
