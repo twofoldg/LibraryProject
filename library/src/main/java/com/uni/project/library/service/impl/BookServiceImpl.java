@@ -1,6 +1,7 @@
 package com.uni.project.library.service.impl;
 
 import com.uni.project.library.entity.Book;
+import com.uni.project.library.exception.AlreadyExistsExceptionCustom;
 import com.uni.project.library.exception.NotFoundExceptionCustom;
 import com.uni.project.library.repository.BookRepository;
 import com.uni.project.library.service.BookService;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -78,5 +80,10 @@ public class BookServiceImpl implements BookService {
         }
 
         return new PageImpl<>(list, PageRequest.of(currentPage, pageSize), findAllBooks().size());
+    }
+
+    @Override
+    public Optional<Book> findBookByIsbn(String isbn) throws AlreadyExistsExceptionCustom {
+        return bookRepository.findByIsbn(isbn);
     }
 }

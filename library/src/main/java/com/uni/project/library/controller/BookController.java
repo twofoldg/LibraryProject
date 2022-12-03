@@ -1,6 +1,10 @@
 package com.uni.project.library.controller;
 
+import com.uni.project.library.entity.Author;
 import com.uni.project.library.entity.Book;
+import com.uni.project.library.entity.Category;
+import com.uni.project.library.entity.Publisher;
+import com.uni.project.library.exception.AlreadyExistsExceptionCustom;
 import com.uni.project.library.service.AuthorService;
 import com.uni.project.library.service.BookService;
 import com.uni.project.library.service.CategoryService;
@@ -13,6 +17,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,8 +59,26 @@ public class BookController {
             var pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().toList();
             model.addAttribute("pageNumbers", pageNumbers);
         }
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return "list-books";
+    }
+
+    @RequestMapping({ "/booksIsbn", "/" })
+    public String findAllBooksIsbn(Model model, @RequestParam("page") Optional<Integer> page,
+                               @RequestParam("size") Optional<Integer> size) {
+
+        Integer currentPage = page.orElse(1);
+        Integer pageSize = size.orElse(5);
+
+        Page<Book> bookPage = bookService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
+
+        model.addAttribute("books", bookPage);
+
+        int totalPages = bookPage.getTotalPages();
+        if (totalPages > 0) {
+            var pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().toList();
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+        return "list-books-isbn-error";
     }
 
     @RequestMapping("/searchBook")
@@ -74,7 +98,8 @@ public class BookController {
     }
 
     @GetMapping("/add")
-    public String showCreateForm(Book book, Model model) {
+    public String showCreateForm(Book book,
+                                 Model model) {
 
         model.addAttribute("categories", categoryService.findAllCategories());
         model.addAttribute("authors", authorService.findAllAuthors());
@@ -85,9 +110,14 @@ public class BookController {
     @RequestMapping("/add-book")
     public String createBook(Book book,
                              BindingResult result,
-                             Model model) {
+                             Model model) throws AlreadyExistsExceptionCustom {
+
+        if (bookService.findBookByIsbn(book.getIsbn()).isPresent()) {
+            result.addError(new ObjectError("isbn", "ISBN already exists"));
+        }
+
         if (result.hasErrors()) {
-            return "add-book";
+            return "redirect:/booksIsbn";
         }
 
         bookService.createBook(book);

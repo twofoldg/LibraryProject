@@ -1,23 +1,27 @@
 package com.uni.project.library.service;
 
 import com.uni.project.library.entity.Book;
+import com.uni.project.library.exception.AlreadyExistsExceptionCustom;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface BookService {
-    public List<Book> findAllBooks();
+    List<Book> findAllBooks();
 
-    public List<Book> searchBooks(String keyword);
+    List<Book> searchBooks(String keyword);
 
-    public Book findBookById(Long id);
+    Book findBookById(Long id);
 
-    public void createBook(Book book);
+    void createBook(Book book);
 
-    public void updateBook(Book book);
+    void updateBook(Book book);
 
-    public void deleteBook(Long id);
+    void deleteBook(Long id);
 
-    public Page<Book> findPaginated(Pageable pageable);
+    Page<Book> findPaginated(Pageable pageable);
+
+    Optional<Book> findBookByIsbn(String isbn) throws AlreadyExistsExceptionCustom;
 }

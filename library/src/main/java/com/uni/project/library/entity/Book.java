@@ -22,13 +22,13 @@ public class Book extends BaseEntity {
     @Serial
     private static final long serialVersionUID = -2628256794549784126L;
 
-    @Column(name = "name", nullable = false, length = 50)
+    @Column(name = "name", length = 50)
     private String name;
 
-    @Column(name = "isbn", nullable = false, length = 50, unique = true)
+    @Column(name = "isbn", length = 50, unique = true)
     private String isbn;
 
-    @Column(name = "serialName", nullable = false, length = 50)
+    @Column(name = "serialName", length = 50)
     private String serialName;
 
     @ManyToMany
@@ -59,11 +59,6 @@ public class Book extends BaseEntity {
                 Objects.equals(publisher, book.publisher) &&
                 Objects.equals(description, book.description) &&
                 Objects.equals(category, book.category);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), name, isbn, serialName, author, publisher, description, category);
     }
 
     public String getName() {
