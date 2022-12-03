@@ -21,7 +21,7 @@
 
 		<div th:switch="${categories}" class="container my-5">
 			<p class="my-5">
-				<a href="/addCategory" class="btn btn-dark"> <i
+				<a href="/addCategory" class="btn btn-dark" sec:authorize="hasAuthority('ROLE_ADMIN')"> <i
 					class="fas fa-user-plus ml-2"> Add Category </i></a>
 			</p>
 			<div class="col-md-12">

@@ -20,7 +20,7 @@
 	<div class="container my-2">
 
 		<div th:switch="${publishers}" class="container my-5">
-			<p class="my-5">
+			<p class="my-5" sec:authorize="hasAuthority('ROLE_ADMIN')">
 				<a href="/addPublisher" class="btn btn-dark"> <i
 					class="fas fa-user-plus ml-2"> Add Publisher </i></a>
 			</p>

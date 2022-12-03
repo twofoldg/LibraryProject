@@ -6,6 +6,8 @@ spring:
       show_sql: true
       ddl-auto: update
     generate-ddl: true
+  flyway:
+    enabled: false
 
   datasource:
     url: ${app.datasource.url}
