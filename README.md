@@ -4,7 +4,17 @@ Made by:
 - Hristiyan Tanev - 2101321020 
 - Georgi Georgiev - 2101321017
 
-Testing users:
+The project is made with:
+- Java
+- Spring Boot
+- Spring Security
+- Flyway
+- Thymeleaf
+- HTML(Bootstrap)
+- PosgreSQL
+- Docker
+
+Test users:
 - ivan_barselona@abv.bg : 123456
 - naruto_gamer@abv.bg : 123456
 - georgigeorgiev@gmail.com : admin
@@ -12,9 +22,9 @@ Testing users:
 
 Install notes:
 
-- Start the env file
-- `docker create network uni_library`
-- `docker-compose up -d`
+- Start the env file - wthich will set the needed env variables
+- create a network with - `docker create network uni_library`
+- run the docker compose file with - `docker-compose up -d`
 - Start the project - it will create the database and excecute the migration script for the users
 
 Current database desing: 
