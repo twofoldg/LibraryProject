@@ -1,8 +1,8 @@
 # UniProject
 
 Made by:
-Hristiyan Tanev - 2101321020
-Georgi Georgiev - 2101321017
+- Hristiyan Tanev - 2101321020 
+- Georgi Georgiev - 2101321017
 
 Testing users:
 - ivan_barselona@abv.bg : 123456
