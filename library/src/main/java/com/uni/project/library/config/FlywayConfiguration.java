@@ -9,6 +9,10 @@ import javax.sql.DataSource;
 @Configuration
 public class FlywayConfiguration {
 
+    /*
+    * Използваме го за да настроим flyway така че първо hibernate да създава таблиците,
+    * а след това flyway да пусне скриптовете, които добавят данни в таблиците.
+    * */
     @Autowired
     public FlywayConfiguration(DataSource dataSource) {
         Flyway.configure().baselineOnMigrate(true).dataSource(dataSource).load().migrate();

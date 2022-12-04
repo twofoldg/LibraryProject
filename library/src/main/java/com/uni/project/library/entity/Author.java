@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import java.io.Serial;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,6 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class Author extends BaseEntity {
 
+    @Serial
     private static final long serialVersionUID = 6682148315095000762L;
 
     @Column(name = "name", nullable = false, length = 50)

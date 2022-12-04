@@ -40,11 +40,12 @@ public class Book extends BaseEntity {
     @ManyToOne
     private Publisher publisher;
 
+    @ManyToOne
+    private Category category;
+
     @Column(name = "description", length = 500)
     private String description;
 
-    @ManyToOne
-    private Category category;
 
     @Override
     public boolean equals(Object o) {

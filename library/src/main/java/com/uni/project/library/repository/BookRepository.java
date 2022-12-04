@@ -9,12 +9,8 @@ import java.util.Optional;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-    Optional<Book> findByName(String name);
-
-    Optional<Book> findByAuthor(String author);
-
     @Query("SELECT b FROM Book b WHERE b.name LIKE %?1%" + " OR b.isbn LIKE %?1%" + " OR b.serialName LIKE %?1%")
-    public List<Book> search(String keyword);
+    List<Book> search(String keyword);
 
     Optional<Book> findByIsbn(String isbn);
 }

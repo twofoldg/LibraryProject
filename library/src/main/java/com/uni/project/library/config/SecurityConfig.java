@@ -21,6 +21,10 @@ public class SecurityConfig {
     @Autowired
     private DataSource dataSource;
 
+    /*
+    Използваме го за да настроим,че сайта ще работи през login форма, които ще имат достъп до сайта,
+    както и пренасочването след login/logout
+       */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -39,6 +43,9 @@ public class SecurityConfig {
         return http.build();
     }
 
+    /*
+     Използваме го за конфигурация на username, password и роля на user-ите, които ще имат достъп до сайта
+     */
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()

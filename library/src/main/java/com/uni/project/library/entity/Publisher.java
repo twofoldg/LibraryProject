@@ -1,15 +1,13 @@
 package com.uni.project.library.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import java.io.Serial;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -17,6 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class Publisher extends BaseEntity {
 
+    @Serial
     private static final long serialVersionUID = 9067171515827528547L;
 
     @Column(name = "name", nullable = false, length = 100)

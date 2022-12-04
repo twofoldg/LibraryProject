@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import java.io.Serial;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -16,6 +17,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class Category extends BaseEntity {
 
+    @Serial
     private static final long serialVersionUID = -171692770127954503L;
 
     @Column(name = "name", nullable = false, length = 100)
@@ -40,12 +42,4 @@ public class Category extends BaseEntity {
         this.books = books;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Category category = (Category) o;
-        return Objects.equals(name, category.name) && Objects.equals(books, category.books);
-    }
 }
