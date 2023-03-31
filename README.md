@@ -22,7 +22,7 @@ Test users:
 
 Install notes:
 
-- Start the env file - wthich will set the needed env variables
+- Start the env file - which will set the needed env variables
 - create a network with - `docker network create uni_library`
 - run the docker compose file with - `docker-compose up -d`
 - Start the project - it will create the database and excecute the migration script for the users
