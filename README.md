@@ -2,7 +2,6 @@
 
 Made by:
 - Georgi Georgiev - 2101321017
-- Hristiyan Tanev - 2101321020 
 
 The project is made with:
 - Java
@@ -18,7 +17,6 @@ Test users:
 - ivan_barselona@abv.bg : 123456
 - naruto_gamer@abv.bg : 123456
 - georgigeorgiev@gmail.com : admin
-- hristiyantanev@gmail.com : admin
 
 Install notes:
 
